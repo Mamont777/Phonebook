@@ -2,7 +2,7 @@ import { useCallback, useEffect } from 'react';
 import { createPortal } from 'react-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { toggleModal } from 'redux/contacts/contactsSlice';
-import { selectShowModal } from 'redux/selectors';
+import { selectShowModal } from 'redux/contacts/selectors';
 import css from './Modal.module.css';
 
 const modalRoot = document.querySelector('#modal-root');

@@ -1,6 +1,6 @@
 import { useDispatch } from 'react-redux';
 import { toggleModal } from 'redux/contacts/contactsSlice';
-import { deleteContact } from 'redux/auth/operations';
+import { deleteContact } from 'redux/contacts/operations';
 import css from './DeleteContactWarning.module.css';
 
 export const DeleteContactWarning = ({ id }) => {

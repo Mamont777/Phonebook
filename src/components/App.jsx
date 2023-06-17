@@ -4,13 +4,13 @@ import ContactList from './ContactList';
 import Filter from './Filter';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
-import { fetchContacts } from 'redux/auth/operations';
+import { fetchContacts } from 'redux/contacts/operations.js';
 import {
   selectDeleteId,
   selectError,
   selectIsLoading,
   selectShowModal,
-} from 'redux/selectors';
+} from '../redux/contacts/selectors.js';
 import { Modal } from './Modal/Modal';
 import { DeleteContactWarning } from './DeleteContactWarning/DeleteContactWarning';
 

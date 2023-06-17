@@ -1,7 +1,7 @@
 import { useSelector, useDispatch } from 'react-redux';
 import { FcSearch } from 'react-icons/fc';
 import css from './Filter.module.css';
-import { selectFilter } from 'redux/selectors';
+import { selectFilter } from 'redux/contacts/selectors.js';
 import { filterContacts } from 'redux/contacts/filterSlice';
 
 const Filter = () => {
