@@ -1,23 +1,30 @@
 import { useSelector } from 'react-redux';
-import css from './ContactList.module.css';
 import { selectFilteredContacts } from 'redux/contacts/selectors.js';
 import { ContactItem } from 'components/ContactItem/ContactItem';
+import { Contacts } from './ContactList.styled';
+
+function getRandomHexColor() {
+  return `#${Math.floor(Math.random() * 16777215).toString(16)}`;
+}
 
 function ContactList() {
   const filteredContacts = useSelector(selectFilteredContacts);
 
   return (
-    <ul className={css.contacts}>
-      {filteredContacts.map(({ id, name, phone, avatar }) => (
-        <ContactItem
-          key={id}
-          id={id}
-          name={name}
-          phone={phone}
-          avatar={avatar}
-        />
-      ))}
-    </ul>
+    <Contacts>
+      {filteredContacts.map(({ id, name, number }) => {
+        const randomColor = getRandomHexColor();
+        return (
+          <ContactItem
+            key={id}
+            id={id}
+            name={name}
+            number={number}
+            randomColor={randomColor}
+          />
+        );
+      })}
+    </Contacts>
   );
 }
 

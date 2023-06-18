@@ -3,7 +3,7 @@ import { createPortal } from 'react-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { toggleModal } from 'redux/contacts/contactsSlice';
 import { selectShowModal } from 'redux/contacts/selectors';
-import css from './Modal.module.css';
+import { Overlay, ModalBox } from './Modal.styled.jsx';
 
 const modalRoot = document.querySelector('#modal-root');
 
@@ -34,9 +34,9 @@ export const Modal = ({ children }) => {
   }
 
   return createPortal(
-    <div className={css.overlay}>
-      <div className={css.modal}>{children}</div>
-    </div>,
+    <Overlay>
+      <ModalBox>{children} </ModalBox>
+    </Overlay>,
     modalRoot
   );
 };

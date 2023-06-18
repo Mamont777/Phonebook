@@ -6,9 +6,17 @@ import { BsFillTelephoneFill } from 'react-icons/bs';
 import { nanoid } from 'nanoid';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import css from './ContactForm.module.css';
 import { addContact } from 'redux/contacts/operations.js';
 import { selectContacts } from 'redux/contacts/selectors.js';
+import {
+  DataInput,
+  Form,
+  Icon,
+  IconWrapper,
+  Label,
+  Wrapper,
+  SubmitButton,
+} from './ContactForm.styled';
 
 const notifyOptions = {
   position: 'top-right',
@@ -70,13 +78,14 @@ function ContactForm() {
   };
 
   return (
-    <div className={css.wrapper}>
-      <form onSubmit={handleSubmit}>
-        <label>
-          <IoMdPersonAdd size="16" className={css.wrapper__icon} />
+    <Wrapper>
+      <Form onSubmit={handleSubmit}>
+        <Label>
+          <IconWrapper top="18px" left="152px">
+            <IoMdPersonAdd size="16" />
+          </IconWrapper>
           Name
-          <input
-            className={css.dataInput}
+          <DataInput
             type="text"
             name="name"
             pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
@@ -85,12 +94,13 @@ function ContactForm() {
             value={name}
             onChange={handleChange}
           />
-        </label>
-        <label>
-          <BsFillTelephoneFill size="16" className={css.wrapper__iconPhone} />
+        </Label>
+        <Label>
+          <IconWrapper top="143px" left="140px">
+            <BsFillTelephoneFill size="16" />
+          </IconWrapper>
           Number
-          <input
-            className={css.dataInput}
+          <DataInput
             type="tel"
             name="number"
             pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
@@ -99,13 +109,15 @@ function ContactForm() {
             value={number}
             onChange={handleChange}
           />
-        </label>
-        <button type="submit" className={css.btn}>
-          <RiUserAddLine size="16" className={css.icon} />
+        </Label>
+        <SubmitButton type="submit">
+          <Icon>
+            <RiUserAddLine size="16" />
+          </Icon>
           Add contact
-        </button>
-      </form>
-    </div>
+        </SubmitButton>
+      </Form>
+    </Wrapper>
   );
 }
 

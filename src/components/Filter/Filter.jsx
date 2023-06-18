@@ -1,8 +1,7 @@
 import { useSelector, useDispatch } from 'react-redux';
-import { FcSearch } from 'react-icons/fc';
-import css from './Filter.module.css';
 import { selectFilter } from 'redux/contacts/selectors.js';
 import { filterContacts } from 'redux/contacts/filterSlice';
+import { FilterInput, Icon, FilterTitle } from './Filter.styled';
 
 const Filter = () => {
   const dispatch = useDispatch();
@@ -12,16 +11,16 @@ const Filter = () => {
     dispatch(filterContacts(e.currentTarget.value));
   };
   return (
-    <label className={css.filterTitle}>
-      <FcSearch size="18" className={css.icon} /> Find contacts by name
-      <input
-        className={css.filterInput}
+    <FilterTitle>
+      <Icon size="18" />
+      Find contacts by name
+      <FilterInput
         type="text"
         value={filter}
         onChange={handleChangeFilter}
         placeholder="search"
       />
-    </label>
+    </FilterTitle>
   );
 };
 

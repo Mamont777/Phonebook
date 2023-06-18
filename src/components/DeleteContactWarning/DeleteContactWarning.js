@@ -1,7 +1,14 @@
 import { useDispatch } from 'react-redux';
 import { toggleModal } from 'redux/contacts/contactsSlice';
 import { deleteContact } from 'redux/contacts/operations';
-import css from './DeleteContactWarning.module.css';
+import {
+  ButtonNo,
+  ButtonOk,
+  ButtonWrapper,
+  DeleteWarning,
+  ModalWrapper,
+  Text,
+} from './DeleteContactWarning.styled';
 
 export const DeleteContactWarning = ({ id }) => {
   const dispatch = useDispatch();
@@ -14,28 +21,18 @@ export const DeleteContactWarning = ({ id }) => {
     dispatch(toggleModal(id));
   };
   return (
-    <div className={css.deleteWarning}>
-      <div className={css.modalWrapper}>
-        <div className={css.text}>
-          Are you sure you want to delete this contact?
-        </div>
-        <div className={css.buttonWrapper}>
-          <button
-            type="button"
-            className={css.buttonOk}
-            onClick={handleDeleteContact}
-          >
+    <DeleteWarning>
+      <ModalWrapper>
+        <Text>Are you sure you want to delete this contact?</Text>
+        <ButtonWrapper>
+          <ButtonOk type="button" onClick={handleDeleteContact}>
             OK
-          </button>
-          <button
-            type="button"
-            className={css.buttonNo}
-            onClick={handleCloseModal}
-          >
+          </ButtonOk>
+          <ButtonNo type="button" onClick={handleCloseModal}>
             No
-          </button>
-        </div>
-      </div>
-    </div>
+          </ButtonNo>
+        </ButtonWrapper>
+      </ModalWrapper>
+    </DeleteWarning>
   );
 };
