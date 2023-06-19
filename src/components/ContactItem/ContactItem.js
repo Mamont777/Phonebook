@@ -34,6 +34,6 @@ export const ContactItem = ({ id, name, number, randomColor }) => {
 ContactItem.propTypes = {
   //   id: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
-  phone: PropTypes.string.isRequired,
+  number: PropTypes.string.isRequired,
   randomColor: PropTypes.string,
 };

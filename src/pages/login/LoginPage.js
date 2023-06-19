@@ -1,7 +1,7 @@
 import { LoginForm } from 'components/LoginForm/LoginForm';
 import { LoginBox, LoginTitle } from './LoginPage.styled';
 
-export const LoginPage = () => {
+const LoginPage = () => {
   return (
     <>
       <LoginTitle>Login</LoginTitle>
@@ -11,3 +11,5 @@ export const LoginPage = () => {
     </>
   );
 };
+
+export default LoginPage;

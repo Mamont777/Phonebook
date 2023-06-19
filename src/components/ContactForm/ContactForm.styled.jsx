@@ -21,7 +21,6 @@ export const Wrapper = styled.div`
   }
 `;
 export const Form = styled.form`
-  margin-top: 15px;
   padding-bottom: 15px;
   border-radius: 5px;
   border-bottom: ${props => `1px solid ${props.theme.colors.bd}`};
@@ -49,7 +48,7 @@ export const DataInput = styled.input`
   box-sizing: border-box;
 `;
 
-export const SubmitButton = styled.btn`
+export const SubmitButton = styled.button`
   margin-bottom: 15px;
   background-color: #c2fbd7;
   border-radius: 100px;

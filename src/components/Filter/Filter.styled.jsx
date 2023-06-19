@@ -5,12 +5,18 @@ export const FilterTitle = styled.label`
   position: relative;
   align-items: center;
   text-shadow: -1px 4px 4px rgba(0, 0, 0, 0.6);
+  display: flex;
+  flex-direction: column;
+  margin: 5px 0 25px 0;
+  padding-top: 15px;
+  font-size: 18px;
+  font-weight: 600;
 `;
 
 export const Icon = styled(FcSearch)`
   position: absolute;
   margin-right: 220px;
-  bottom: 53px;
+  bottom: 58px;
 `;
 
 export const FilterInput = styled.input`

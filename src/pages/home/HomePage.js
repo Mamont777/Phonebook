@@ -1,7 +1,7 @@
 import { NavLink } from 'components/Navigation/Navigation.styled';
 import { HomePageImage, Wrapper } from './HomePage.styled';
 
-export const HomePage = () => {
+const HomePage = () => {
   return (
     <Wrapper>
       <NavLink to="/contacts">
@@ -10,3 +10,5 @@ export const HomePage = () => {
     </Wrapper>
   );
 };
+
+export default HomePage;

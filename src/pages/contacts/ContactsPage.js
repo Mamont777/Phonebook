@@ -13,8 +13,9 @@ import Filter from 'components/Filter/Filter';
 import ContactList from 'components/ContactList/ContactList';
 import { Modal } from 'components/Modal/Modal';
 import { DeleteContactWarning } from 'components/DeleteContactWarning/DeleteContactWarning';
+import { Wrapper, Title, PhonebookWrapper } from './ContactsPage.styled.jsx';
 
-export const ContactsPage = () => {
+const ContactsPage = () => {
   const dispatch = useDispatch();
   const isLoading = useSelector(selectIsLoading);
   const error = useSelector(selectError);
@@ -26,29 +27,33 @@ export const ContactsPage = () => {
   }, [dispatch]);
 
   return (
-    <>
-      <h1>Phonebook</h1>
-      <ContactForm />
-      <h2>Contacts</h2>
-      <Filter />
-      <div
-        style={{
-          display: 'flex',
-          justifyContent: 'center',
-          marginTop: '10px',
-        }}
-      >
+    <Wrapper>
+      <Title>Phonebook</Title>
+      <PhonebookWrapper>
+        <ContactForm />
+        <Title>Contacts</Title>
+        <Filter />
+        <div
+          style={{
+            display: 'flex',
+            justifyContent: 'center',
+            marginTop: '10px',
+          }}
+        ></div>
         {isLoading && !error && (
           <b style={{ textAlign: 'center' }}>Request in progress...</b>
         )}
-      </div>
-      <ContactList />
-      {showModal && (
-        <Modal>
-          <DeleteContactWarning id={deleteId} />
-        </Modal>
-      )}
-      <ToastContainer />
-    </>
+
+        <ContactList />
+        {showModal && (
+          <Modal>
+            <DeleteContactWarning id={deleteId} />
+          </Modal>
+        )}
+        <ToastContainer />
+      </PhonebookWrapper>
+    </Wrapper>
   );
 };
+
+export default ContactsPage;

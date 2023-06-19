@@ -13,9 +13,9 @@ import {
   Form,
   Icon,
   IconWrapper,
-  Label,
   Wrapper,
   SubmitButton,
+  Label,
 } from './ContactForm.styled';
 
 const notifyOptions = {

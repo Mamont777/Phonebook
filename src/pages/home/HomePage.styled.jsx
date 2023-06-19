@@ -1,5 +1,5 @@
 import styled, { keyframes } from 'styled-components';
-import homeIcon from 'images/phone-book-icon.jpg';
+import homeIcon from 'images/phone-book-icon.png';
 
 const pulseAnimation = keyframes`
   0% {transform: scale(0.95)}

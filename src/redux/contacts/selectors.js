@@ -5,8 +5,11 @@ export const selectIsLoading = state => state.contacts.isLoading;
 export const selectError = state => state.contacts.error;
 export const selectShowModal = state => state.contacts.showModal;
 export const selectDeleteId = state => state.contacts.deleteId;
-export const selectContacts = ({ contacts }) =>
+export const selectContacts = state => state.contacts.items;
+
+export const selectSortedContacts = createSelector(selectContacts, contacts => {
   [...contacts.items].sort((a, b) => a.name.localeCompare(b.name));
+});
 
 export const selectFilteredContacts = createSelector(
   [selectContacts, selectFilter],

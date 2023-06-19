@@ -1,7 +1,7 @@
 import { RegisterForm } from 'components/RegisterForm/RegisterForm';
 import { RegisterBox, Title } from './RegisterPage.styled';
 
-export const RegisterPage = () => {
+const RegisterPage = () => {
   return (
     <>
       <Title>Create your account</Title>
@@ -11,3 +11,5 @@ export const RegisterPage = () => {
     </>
   );
 };
+
+export default RegisterPage;

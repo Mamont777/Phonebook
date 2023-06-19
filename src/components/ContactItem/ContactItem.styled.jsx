@@ -2,13 +2,12 @@ import styled from 'styled-components';
 import { TiUserDeleteOutline } from 'react-icons/ti';
 
 export const ContactItemWrapper = styled.li`
-  display: flex;
   margin: 10px;
-  padding-top: 5px;
+  padding: 5px;
   justify-content: space-between;
 `;
 
-export const ContactData = styled.p`
+export const ContactData = styled.div`
   margin: 0;
   display: flex;
   justify-content: space-between;
