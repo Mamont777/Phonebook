@@ -4,8 +4,9 @@ import { RiUserAddLine } from 'react-icons/ri';
 import { IoMdPersonAdd } from 'react-icons/io';
 import { BsFillTelephoneFill } from 'react-icons/bs';
 import { nanoid } from 'nanoid';
-import { toast } from 'react-toastify';
+import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import * as Yup from 'yup';
 import { addContact } from 'redux/contacts/operations.js';
 import { selectContacts } from 'redux/contacts/selectors.js';
 import {
@@ -28,6 +29,20 @@ const notifyOptions = {
   progress: undefined,
   theme: 'colored',
 };
+const schema = Yup.object().shape({
+  name: Yup.string()
+    .matches(
+      /^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$/,
+      'Name may contain only letters, apostrophe, dash and spaces'
+    )
+    .required('Name is required'),
+  number: Yup.string()
+    .matches(
+      /^\+\d{1,4}[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}$/,
+      'Invalid phone number. The number must start with a plus sign and contain valid digits and separators'
+    )
+    .required('Number is required'),
+});
 
 function ContactForm() {
   const dispatch = useDispatch();
@@ -35,6 +50,7 @@ function ContactForm() {
 
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
+  const [formErrors, setFormErrors] = useState({});
 
   const handleChange = e => {
     const { name, value } = e.currentTarget;
@@ -59,17 +75,30 @@ function ContactForm() {
       return;
     }
     dispatch(addContact(contact));
+    setFormErrors({});
   };
 
-  const handleSubmit = e => {
+  const handleSubmit = async e => {
     e.preventDefault();
-    const contact = {
-      id: nanoid(10),
-      name,
-      number,
-    };
-    addContacts(contact);
-    clearForm();
+    try {
+      await schema.validate({ name, number }, { abortEarly: false });
+      const contact = {
+        id: nanoid(10),
+        name,
+        number,
+      };
+      addContacts(contact);
+      clearForm();
+    } catch (error) {
+      if (error instanceof Yup.ValidationError) {
+        const errors = {};
+        error.inner.forEach(err => {
+          errors[err.path] = err.message;
+        });
+        setFormErrors(errors);
+      }
+      console.log(error.message);
+    }
   };
 
   const clearForm = () => {
@@ -79,7 +108,7 @@ function ContactForm() {
 
   return (
     <Wrapper>
-      <Form onSubmit={handleSubmit}>
+      <Form onSubmit={handleSubmit} validationSchema={schema}>
         <Label>
           <IconWrapper top="18px" left="152px">
             <IoMdPersonAdd size="16" />
@@ -88,8 +117,6 @@ function ContactForm() {
           <DataInput
             type="text"
             name="name"
-            pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
-            title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
             required
             value={name}
             onChange={handleChange}
@@ -103,8 +130,6 @@ function ContactForm() {
           <DataInput
             type="tel"
             name="number"
-            pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
-            title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
             required
             value={number}
             onChange={handleChange}
@@ -117,6 +142,21 @@ function ContactForm() {
           Add contact
         </SubmitButton>
       </Form>
+      {Object.keys(formErrors).length > 0 && (
+        <div>
+          {Object.values(formErrors).map((error, index) => (
+            <div key={index}>{error}</div>
+          ))}
+        </div>
+      )}
+      <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        closeOnClick
+        pauseOnHover
+        draggable
+      />
     </Wrapper>
   );
 }
