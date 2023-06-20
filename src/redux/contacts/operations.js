@@ -23,7 +23,7 @@ export const addContact = createAsyncThunk(
   async (newContact, thunkAPI) => {
     try {
       const { data } = await axios.post('/contacts', newContact);
-      toast.success('Added contact', { position: 'bottom-right' });
+      toast.success('Contact added', { position: 'bottom-right' });
       return data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);

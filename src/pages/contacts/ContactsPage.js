@@ -1,4 +1,3 @@
-import { ToastContainer } from 'react-toastify';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import { fetchContacts } from 'redux/contacts/operations';
@@ -50,7 +49,6 @@ const ContactsPage = () => {
             <DeleteContactWarning id={deleteId} />
           </Modal>
         )}
-        <ToastContainer />
       </PhonebookWrapper>
     </Wrapper>
   );
